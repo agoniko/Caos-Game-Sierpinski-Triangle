@@ -11,16 +11,17 @@ import os
 ITERATION_LIMIT = 25000
 SPEED = 240 #fps
 
-HEIGHT = 900
-WIDTH = 900
-LENGTH = 800
-BLACK = (0, 0, 0)
+HEIGHT = 600
+WIDTH = 600
+LENGTH = 600
+WALLPAPER = (13, 17, 23) #my git hub wallpaper
+WHITE = (255, 255, 255)
 H = LENGTH * math.sin(math.radians(60))
 BASE_X = (WIDTH - LENGTH) / 2
 BASE_Y = (HEIGHT + H) / 2
 points = []
 vertices = []
-RADIUS = 2
+RADIUS = 1
 
 def make_gif():
     filename = "fractal.gif"
@@ -39,11 +40,11 @@ def make_gif():
 def init_caos(screen):
     global vertices
     global points
-    pygame.draw.circle(screen, BLACK, [BASE_X, BASE_Y], RADIUS)
+    pygame.draw.circle(screen, WHITE, [BASE_X, BASE_Y], RADIUS)
     vertices.append([BASE_X, BASE_Y])
-    pygame.draw.circle(screen, BLACK, [BASE_X + LENGTH, BASE_Y], RADIUS)
+    pygame.draw.circle(screen, WHITE, [BASE_X + LENGTH, BASE_Y], RADIUS)
     vertices.append([BASE_X + LENGTH, BASE_Y])
-    pygame.draw.circle(screen, BLACK, [BASE_X + LENGTH / 2, BASE_Y - H], RADIUS)
+    pygame.draw.circle(screen, WHITE, [BASE_X + LENGTH / 2, BASE_Y - H], RADIUS)
     vertices.append([BASE_X + LENGTH / 2, BASE_Y - H])
 
     #adding the first random point
@@ -62,7 +63,7 @@ def draw_point(screen):
     x = ((point[0] - vertex[0]) / 2) + vertex[0]
     y = ((vertex[1] - point[1]) / 2) + point[1]
     points.append([x, y])
-    pygame.draw.circle(screen, BLACK, [x, y], RADIUS)
+    pygame.draw.circle(screen, WHITE, [x, y], RADIUS)
 
 
 
@@ -72,7 +73,7 @@ if __name__ == "__main__":
     random.seed(int(time.time() * 1000))
     pygame.init()
     screen = pygame.display.set_mode([WIDTH,HEIGHT])
-    screen.fill((255, 255, 255)) # Fill the background with white
+    screen.fill(WALLPAPER) # Fill the background with white
     clock = pygame.time.Clock()
     cont = 0
     init_caos(screen)
