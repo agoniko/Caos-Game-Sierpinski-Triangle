@@ -28,7 +28,6 @@ def make_gif():
     files = list(filter(os.path.isfile, glob.glob("./screens/" + "*")))
     files.sort(key = lambda s: int(re.search(r'\d+', s).group()))
     files.reverse()
-    print(files)
     frames = [Image.open(image) for image in files]
     frames.reverse()
     frame_one = frames[0]
