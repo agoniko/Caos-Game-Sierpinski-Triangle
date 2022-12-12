@@ -1,5 +1,4 @@
 import re
-
 import pygame
 import math
 import random
@@ -9,10 +8,10 @@ from PIL import Image
 import os
 
 ITERATION_LIMIT = 25000
-SPEED = 240 #fps
+SPEED = 10000 #fps
 
-HEIGHT = 600
-WIDTH = 600
+HEIGHT = 1000
+WIDTH = 1000
 LENGTH = 600
 WALLPAPER = (13, 17, 23) #my git hub wallpaper
 WHITE = (255, 255, 255)
@@ -32,7 +31,7 @@ def make_gif():
     frames.reverse()
     frame_one = frames[0]
     frame_one.save(filename, format="GIF", append_images=[frames[i] for i in range(0,len(frames)) if i % 10 == 0],
-               save_all=True, duration=20, loop=1)
+               save_all=True, duration=20, loop=0)
     [os.remove(file) for file in files if file != filename]
 
 
