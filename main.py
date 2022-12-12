@@ -7,7 +7,7 @@ from PIL import Image
 import os
 
 ITERATION_LIMIT = 25000
-SPEED = 120 #fps
+SPEED = 480 #fps
 
 HEIGHT = 900
 WIDTH = 900
@@ -82,8 +82,8 @@ if __name__ == "__main__":
         draw_point(screen)
         pygame.display.flip()
         clock.tick(SPEED)
-        if cont % 10 == 0:
-            pygame.image.save(screen, f"./screens/screenshot{cont}.jpeg")
+        """if cont % 10 == 0:
+            pygame.image.save(screen, f"./screens/screenshot{cont}.jpeg")"""
         cont = cont+1
 
     pygame.quit()
