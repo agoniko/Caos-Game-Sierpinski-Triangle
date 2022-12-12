@@ -1,3 +1,5 @@
+import re
+
 import pygame
 import math
 import random
@@ -7,7 +9,7 @@ from PIL import Image
 import os
 
 ITERATION_LIMIT = 25000
-SPEED = 480 #fps
+SPEED = 240 #fps
 
 HEIGHT = 900
 WIDTH = 900
@@ -18,15 +20,19 @@ BASE_X = (WIDTH - LENGTH) / 2
 BASE_Y = (HEIGHT + H) / 2
 points = []
 vertices = []
-RADIUS = 1
+RADIUS = 2
 
 def make_gif():
     filename = "fractal.gif"
-    frames = [Image.open(image) for image in glob.glob(f"./screens/*.jpeg")]
-    frame_one = frames[0]
-    frame_one.save(filename, format="GIF", append_images=frames,
-               save_all=True, duration=len(frames)*10, loop=1)
     files = list(filter(os.path.isfile, glob.glob("./screens/" + "*")))
+    files.sort(key = lambda s: int(re.search(r'\d+', s).group()))
+    files.reverse()
+    print(files)
+    frames = [Image.open(image) for image in files]
+    frames.reverse()
+    frame_one = frames[0]
+    frame_one.save(filename, format="GIF", append_images=[frames[i] for i in range(0,len(frames)) if i % 10 == 0],
+               save_all=True, duration=20, loop=1)
     [os.remove(file) for file in files if file != filename]
 
 
@@ -82,12 +88,11 @@ if __name__ == "__main__":
         draw_point(screen)
         pygame.display.flip()
         clock.tick(SPEED)
-        """if cont % 10 == 0:
-            pygame.image.save(screen, f"./screens/screenshot{cont}.jpeg")"""
+        #pygame.image.save(screen, f"./screens/screenshot{cont}.jpeg") #decomment to save every frame
         cont = cont+1
 
     pygame.quit()
-    #make_gif() #takes too long and don't generate a good gif, to fix
+    #make_gif() #decomment if you want to create a gif (also decomment the image.save in the while loop)
 
 
 
